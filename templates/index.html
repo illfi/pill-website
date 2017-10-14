@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="Haze Booth">
+	<meta name="description" content="The Pill programming language.">
+	<title>The Pill Programming Language</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+
+
+	<style>
+		.nav {
+			text-align: center;
+			line-height: 50px;
+			min-height: 50px;
+			margin: 15px 9vw;
+		}
+
+		.logo {
+			width: 30px;
+			height: auto;
+		}
+
+		img {
+			display: block;
+			width: 100%;
+			height: auto;
+		}
+
+		.title-text {
+			font-size: 1.5rem;
+			font-weight: bolder;
+			padding: 0px 20px;
+		}
+
+		.title-link-text {
+			font-size: 1.4rem;
+			font-weight: bold;
+			padding: 0px 20px;
+			display: inline;
+		}
+
+		.nav-link-list {
+			list-style-type: none;
+		}
+
+		li {
+			display: inline;
+		}
+
+		.columns {
+			padding: 45px 12vw;
+		}
+
+		.editor-column {
+			height: 250px;
+		}
+
+		#editor {
+			width: 100%;
+			height: 100%;
+			position: relative;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			box-shadow: rgba(50, 50, 93, 0.1) 0px 2px 4px 0px;
+		}
+
+		.pill-features-header {
+			padding: 5px 20px;
+			margin: 0px auto;
+			font-weight: bold;
+		}
+
+		.pill-features-list {
+			margin-left: 55px !important;
+			margin-top: 2px !important;
+		}
+
+		ul.pill-features-list li:before {
+			content: '\2014';
+			position: absolute;
+			margin-left: -22px;
+		}
+
+		@-moz-keyframes spin {
+			0% {
+				-moz-transform: rotate(-180deg);
+			}
+			100% {
+				-moz-transform: rotate(180deg);
+			}
+		}
+
+		@-webkit-keyframes spin {
+			0% {
+				-webkit-transform: rotate(-180deg);
+			}
+			100% {
+				-webkit-transform: rotate(180deg);
+			}
+		}
+
+		@keyframes spin {
+			0% {
+				-webkit-transform: rotate(-20deg);
+				transform: rotate(-20deg);
+			}
+			100% {
+				-webkit-transform: rotate(20deg);
+				transform: rotate(20deg);
+			}
+		}
+
+		.footer {
+			background: linear-gradient(to right bottom, rgb(13, 13, 13), rgb(15, 15, 15) 50%, rgb(12, 12, 12)) !important;
+			padding: 2px 13vw;
+			position: fixed;
+			width: 100%;
+			bottom: 0;
+			overflow: hidden;
+		}
+
+		@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: portrait) {
+			.footer-text {
+				font-size: 3.2vw;
+			}
+			.dl-div {
+				display: none;
+			}
+
+			.title-text {
+				font-size: 4.2vw;
+				padding: 0px 5px;
+			}
+			.nav-link-list {
+				display: none;
+			}
+			.columns {
+				padding-top: 15px;
+			}
+			.github-mobile {
+				display: initial !important;
+			}
+			.pill-features-header {
+				margin-top: 40px !important;
+			}
+		}
+
+		@media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (orientation: landscape) {
+			.nav-link-list {
+				display: none;
+			}
+			.nav {
+				margin-bottom: 0px;
+			}
+			.dl-div {
+				display: none;
+			}
+			.footer-text {
+				font-size: 3.2vh;
+			}
+			.columns {
+				padding-top: 15px;
+			}
+			.github-mobile {
+				display: initial !important;
+			}
+		}
+
+		.github-mobile {
+			display: none;
+		}
+
+		.inline {
+			display: inline-flex;
+		}
+
+		.footer p {
+			color: #FEFEFE;
+		}
+
+		.w-h-link:hover {
+			color: #CCF5EF;
+		}
+
+		.logo-svg {
+			-webkit-animation: spin alternate 2s linear infinite;
+			-moz-animation: spin alternate 2s linear infinite;
+			animation: spin alternate 2s linear infinite;
+		}
+
+		.coming-soon-text {
+			font-size: 75%;
+			color: #999999;
+			padding: 5px 5px;
+		}
+
+	</style>
+
+</head>
+
+<body>
+	<div class="container is-fluid">
+		<div class="nav level">
+			<div class="level-left inline">
+				<div class="logo">
+					<img class="logo-svg" src="{{ url_for('static', filename='images/pill_logo.svg') }}" </div>
+				</div>
+				<span class="title-text">The Pill Programming Language</span>
+			</div>
+
+			<div class="level-right">
+				<ul class="nav-link-list">
+					<li><a class="title-link-text" href="docs">Documentation</a></li>
+					<li><a class="title-link-text" href="//github.com/hvze/pill#categorized-tests">Try It!</a></li>
+					<li><a class="title-link-text" href="//github.com/hvze/pill">Github</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="container is-fluid">
+		<div class="columns">
+			<div class="editor-column column">
+				<span class="github-mobile">Check it out on <a href="//github.com/hvze/pill">GitHub</a>, or check the <a href="docs">Documentation</a>!</span>
+				<div id="editor">
+				</div>
+				<span class="coming-soon-text">Live run coming soon! Examples can be found <a href="https://github.com/hvze/pill/tree/master/tests">here</a>!</span>
+			</div>
+			<div class="column">
+				<h1 class="pill-features-header">Pill Features</h1>
+				<div class="content">
+					<ul class="pill-features-list">
+						<li>
+							<p>Assembly like syntax</p>
+						</li>
+						<li>
+							<p>Custom instructions and eaily editable OpCodes</p>
+						</li>
+						<li>
+							<p>Immutable global registers with mutable instruction scoped registers</p>
+						</li>
+						<li>
+							<p>Fast interpreter written in <a href="//https://www.rust-lang.org/">Rust</a></p>
+						</li>
+						<li>
+							<p>Open Source!</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="levels">
+			<div class="dl-div level-right has-text-centered">
+				<a class="button is-success is-large" href="//github.com/hvze/pill">Download Now!</a>
+			</div>
+		</div>
+	</div>
+
+	<footer class="footer">
+		<div class="content has-text-centered">
+			<p class="footer-text">
+				the pill programming language. made with 💚 by <a class="w-h-link" href="//haze.pw">haze</a> with the help of the
+				<a href="//ill.fi" class="w-h-link">ill team</a> in nyc. </p>
+		</div>
+	</footer>
+
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.8/ace.js" integrity="sha256-198+Grx89n2ofVwo1LWnNTXxIQZIPZJURv+K73cJ93U="
+	 crossorigin="anonymous"></script>
+	<script>
+		var editor_div = document.getElementById("editor");
+		editor_div.innerHTML = "+a;\n\n$add(a_res, b) \{\n\tmvv b a_res\;\n\}\n\n$$() {\n\tmak a_res 0\;\n\tmak b 1;\n\tdo add;\n\tdel b;\n\tdis a_res;\n\}";
+		var editor = ace.edit("editor");
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Haze Booth">
+    <meta name="description" content="The Pill programming language.">
+    <title>The Pill Programming Language</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/tonsky/FiraCode/1.204/distr/fira_code.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+
+    <style>
+        .opcode-list {
+            list-style: none;
+        }
+
+        .m-container {
+            padding: 5vh 4vw;
+        }
+
+        .opcode-name {
+            color: rgb(0, 209, 178);
+            margin-bottom: 0px;
+            margin-top: 0px;
+        }
+
+        .arguments {
+            background-color: #343d46;
+            color: #dfe1e8;
+            font-family: 'Fira Code', monospace;
+            padding: 3px 3px;
+        }
+
+        .seperator {
+            font-size: 2.2rem;
+            margin: 0px 0px;
+        }
+
+        #editor {
+            width: auto;
+            height: 250px;
+            position: relative;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            box-shadow: rgba(50, 50, 93, 0.1) 0px 2px 4px 0px;
+        }
+
+        .examples-div {
+            margin-top: 10px;
+        }
+
+        .button {
+            margin-right: 1vw;
+        }
+
+        .ex-output {
+            font-family: 'Fira Code', monospace;
+            width: 100%;
+            height: 100%;
+            max-height: 288px;
+            color: #dfe1e8;
+            background-color: #343d46;
+            padding: 5px 10px;
+            overflow-y: scroll;
+            box-shadow: rgba(50, 50, 93, 0.1) 2px 2px 4px 4px;
+        }
+    </style>
+    <script>
+        function change_example(to) {
+        {% for example in examples %}
+        let {{ example.name }} = `{{ example.code|safe }}`;
+        let {{ example.name }}_output = `{{ example.output|safe }}`.replace(new RegExp('\n', 'g'), '<br/>');
+        {% endfor %}
+        let editor = ace.edit("editor");
+            switch (to) {
+                {% for example in examples %}
+                    case "{{ example.name }}":
+                        editor.setValue({{ example.name }});
+                        document.getElementById('ex-output').innerHTML = {{example.name}}_output;
+                        break;
+                {% endfor %}
+            }
+        }
+    </script>
+</head>
+
+<body onload="change_example('fizzbuzz');">
+
+    <div class="m-container container is-fluid">
+        <span>Sorry, the documentation is sort of sparse at the moment, but this will be updated as commits are pushed! To go back click <a href="/">here</a>.</span>
+        <h1 class="seperator">Examples</h1>
+        <div class="columns">
+            <div class="column">
+                <div id="editor">
+                </div>
+                <div class="is-mobile level examples-div">
+                    <div class="level-item has-text-centered">
+                        {% for example in examples %}
+                            <a onclick="change_example('{{ example.name }}');" class="button is-primary">{{ example.pretty_name }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <p style="padding: 2px 2px;">Output:</p>
+                <div class="ex-output" id="ex-output"><p></p></div>
+            </div>
+        </div>
+        <h1 class="seperator">Rules:</h1>
+        <div class="box">
+                <ol style="margin-left: 15px; list-style: upper-roman;">
+            {% for rule in rules %}
+                    <li>
+                        <span>{{ rule | safe }}</span>
+                    </li>
+                {% endfor %}
+        </ol>
+            </div>
+        <h1 class="seperator">Types</h1>
+        <ol class="opcode-list">
+            {% for type in types %}
+            <li style="margin-bottom: 20px;">
+                <div class="box">
+                    <h1 class="opcode-name">{{ type.name }}</h1>
+                    <span>{{ type.description }}</span>
+                </div>
+            </li>
+            {% endfor %}
+        </ol>
+        <h1 class="seperator">OpCodes</h1>
+        <ol class="opcode-list">
+            {% for opcode in opcodes %}
+            <li style="margin-bottom: 20px;">
+                <div class="box">
+                    <h1 class="opcode-name">{{ opcode.name }}</h1>
+                    <span class="arguments">{{ opcode.arguments }}</span> </br>
+                    <span>{{ opcode.description }}</span>
+                </div>
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.8/ace.js" integrity="sha256-198+Grx89n2ofVwo1LWnNTXxIQZIPZJURv+K73cJ93U="
+        crossorigin="anonymous"></script>
+    <script>
+        var editor_div = document.getElementById("editor");
+        editor_div.innerHTML = "+a;\n\n$add(a_res, b) \{\n\tmvv b a_res\;\n\}\n\n$$() {\n\tmak a_res 0\;\n\tmak b 1;\n\tdo add;\n\tdel b;\n\tdis a_res;\n\}";
+        var editor = ace.edit("editor");
+
+
+editor.getSession().selection.on('changeSelection', function (e)
+{
+    editor.getSession().selection.clearSelection();
+});
+
+
+    </script>
+</body>
+
+</html>
